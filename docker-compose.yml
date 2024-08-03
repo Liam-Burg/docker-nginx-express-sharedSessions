@@ -1,0 +1,17 @@
+services:
+  api:
+    build: .
+    volumes:
+      - sessions:/usr/src/app/sessions
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    depends_on:
+      - api
+    ports:
+      - 3000:3000
+
+volumes:
+  sessions:
